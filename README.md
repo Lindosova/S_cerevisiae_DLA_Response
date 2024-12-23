@@ -8,7 +8,6 @@ Transcriptomic response of Saccharomyces cerevisiae to D-lactic acid
 
 Использованные программы: 
 
-  * `mafft v7.490`;
   * `R v4.1.2`;
   * `ggplot v3.5.0`.
     
@@ -102,6 +101,9 @@ write.xlsx(x = DEGs, file = "DEGs_yeast.xlsx", rowNames = TRUE)`
 
 
 ## Результаты и обсуждение
+В результате проделанного анализа получены следующие результаты:
+![]()
+
 
 
 
