@@ -12,7 +12,7 @@ Transcriptomic response of Saccharomyces cerevisiae to D-lactic acid
   * `R v4.1.2`;
   * `ggplot v3.5.0`.
     
-Скачиваем данные: 
+Скачиваем данные из статьи Drozdova P. et al. Transcriptional response of Saccharomyces cerevisiae to lactic acid enantiomers //Applied Microbiology and Biotechnology. – 2024. – Т. 108. – №. 1. – С. 121.: 
 
 `fasterq-dump --threads 2 -A --progress SRR24466389; fasterq-dump --threads 2 -A --progress SRR24466390; fasterq-dump --threads 2 -A --progress SRR24466391; fasterq-dump --threads 2 -A --progress SRR24466380; fasterq-dump --threads 2 -A --progress
 SRR24466381; fasterq-dump --threads 2 -A --progress SRR24466382`
@@ -43,33 +43,61 @@ yeast_splice_sites.txt -p 8 -1 ${base}_1.fastq -2 ${base}_2.fastq | samtools vie
 Графики строили с помощью R: 
 ```{r}
 
-`install.packages("BiocManager")
-BiocManager::install("EnhancedVolcano")
-BiocManager::install("DESeq2")`
 
-`count_table <- read.delim("allSamples.featureCounts.txt", skip=1, row.names="Geneid")
+`#Картинка по дрожжам
+#Запускаем пакет
+library(ggplot2)
+#читаем файл (нужные данные к рис. 4 на листе 3)
+yeast.growth <- read.xlsx("253_2023_12863_MOESM2_ESM.xlsx", sheet = 3)
+#Боксплот_статья_дрожжи (без статистики ... )
+ggplot(yeast.growth, aes(x= Condition, y=RGR2)) + #данные для графика
+  geom_boxplot()
+сохраняем график
+ggsave("Дрожжи.png", width = 15, height = 12, units = "cm", dpi = 300)
+
+
+#ВулканоПлот
+#Установка (делаем ОДИН РАЗ!!!!!)
+install.packages("BiocManager") #Установка (делаем ОДИН РАЗ!!!!!)
+BiocManager::install("EnhancedVolcano") #Установка (делаем ОДИН РАЗ!!!!!)
+BiocManager::install("DESeq2") #Установка (делаем ОДИН РАЗ!!!!!)
+
+#Загружаем данные в R
+count_table <- read.delim("allSamples.featureCounts.txt", skip=1, row.names="Geneid")
+
+#Загружаем Sample data
 sample_table <- data.frame(condition=c("DL", "DL", "DL", "control", "control",
-"control"))`
-
-`library(DESeq2)
+                                       "control"))
+#Анализ данных Dseq2
+library(DESeq2) #нужно запускать каждый сеанс (когда открываешь R)
+#Создаю матрицу для Dseq2
 ddsFullCountTable <- DESeqDataSetFromMatrix(
- countData = count_table[,6:11], colData = sample_table, design = ~ condition)
+  countData = count_table[,6:11], colData = sample_table, design = ~ condition)
+#Анализ дифф экспрессии
 dds <- DESeq(ddsFullCountTable)
-res <- results(dds)`
+#Результаты
+res <- results(dds)
 
-`library(EnhancedVolcano)
+
+
+#Визуализация, постройка ВулканоПлота
+library(EnhancedVolcano) #нужно запускать каждый сеанс (когда открываешь R)
+#Сама постройка графика
 EnhancedVolcano(res, lab = rownames(res),
- x = 'log2FoldChange', y = 'pvalue',
- pCutoff=0.05, pCutoffCol = 'padj', FCcutoff = 1,
- title="Large Title", subtitle="Subtitle",
- col = c("grey30", "grey30", "grey30", "red2"),
- xlab="", ylab = bquote(~-Log[10] ~ italic(p)),
- caption="", selectLab = "", legendPosition = 'none')`
+                x = 'log2FoldChange', y = 'pvalue',
+                pCutoff=0.05, pCutoffCol = 'padj', FCcutoff = 1,
+                title="Large Title", subtitle="Subtitle",
+                col = c("grey30", "grey30", "grey30", "red2"),
+                xlab="", ylab = bquote(~-Log[10] ~ italic(p)),
+                caption="", selectLab = "", legendPosition = 'none')
 
-`DEGs <- res[abs(res$log2FoldChange) > 1 & res$padj < 0.05 & complete.cases(res$padj), ]
+
+#Сортировка и запись данных
+DEGs <- res[abs(res$log2FoldChange) > 1 & res$padj < 0.05 & complete.cases(res$padj), ]
 DEGs <- DEGs[order(DEGs$log2FoldChange), ]
-library(openxlsx)
-write.xlsx(x = DEGs, file = "DEGs_yeast.xlsx", rowNames = TRUE)`
+
+library(openxlsx) #нужно запускать каждый сеанс (когда открываешь R)
+write.xlsx(x = DEGs, file = "DEGs_yeast.xlsx", rowNames = TRUE)` 
 
 
 
