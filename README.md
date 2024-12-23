@@ -101,5 +101,11 @@ write.xlsx(x = DEGs, file = "DEGs_yeast.xlsx", rowNames = TRUE)`
 
 
 
+## Результаты и обсуждение
+
+
+
+
+
 
 
