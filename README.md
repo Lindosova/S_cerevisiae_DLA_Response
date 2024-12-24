@@ -48,7 +48,7 @@ yeast_splice_sites.txt -p 8 -1 ${base}_1.fastq -2 ${base}_2.fastq | samtools vie
 library(ggplot2)
 #читаем файл (нужные данные к рис. 4 на листе 3)
 yeast.growth <- read.xlsx("253_2023_12863_MOESM2_ESM.xlsx", sheet = 3)
-#Боксплот_статья_дрожжи (без статистики ... )
+#Боксплот_статья_дрожжи (без статистики, ввиду того, что версия R на моем компьютере устарела для ggpubr)
 ggplot(yeast.growth, aes(x= Condition, y=RGR2)) + #данные для графика
   geom_boxplot()
 сохраняем график
