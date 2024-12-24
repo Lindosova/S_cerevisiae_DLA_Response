@@ -43,7 +43,7 @@ yeast_splice_sites.txt -p 8 -1 ${base}_1.fastq -2 ${base}_2.fastq | samtools vie
 ```{r}
 
 
-`#Картинка по дрожжам
+#Картинка по дрожжам
 #Запускаем пакет
 library(ggplot2)
 #читаем файл (нужные данные к рис. 4 на листе 3)
@@ -96,7 +96,8 @@ DEGs <- res[abs(res$log2FoldChange) > 1 & res$padj < 0.05 & complete.cases(res$p
 DEGs <- DEGs[order(DEGs$log2FoldChange), ]
 
 library(openxlsx) #нужно запускать каждый сеанс (когда открываешь R)
-write.xlsx(x = DEGs, file = "DEGs_yeast.xlsx", rowNames = TRUE)` 
+write.xlsx(x = DEGs, file = "DEGs_yeast.xlsx", rowNames = TRUE)
+```
 
 
 
