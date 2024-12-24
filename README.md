@@ -11,7 +11,7 @@ Transcriptomic response of Saccharomyces cerevisiae to D-lactic acid
   * `R v4.1.2`;
   * `ggplot v3.5.0`.
     
-Скачиваем данные из статьи Drozdova P. et al. Transcriptional response of Saccharomyces cerevisiae to lactic acid enantiomers //Applied Microbiology and Biotechnology. – 2024. – Т. 108. – №. 1. – С. 121.: 
+Скачиваем данные из статьи "Drozdova P. et al. Transcriptional response of Saccharomyces cerevisiae to lactic acid enantiomers //Applied Microbiology and Biotechnology. – 2024.": 
 
 `fasterq-dump --threads 2 -A --progress SRR24466389; fasterq-dump --threads 2 -A --progress SRR24466390; fasterq-dump --threads 2 -A --progress SRR24466391; fasterq-dump --threads 2 -A --progress SRR24466380; fasterq-dump --threads 2 -A --progress
 SRR24466381; fasterq-dump --threads 2 -A --progress SRR24466382`
