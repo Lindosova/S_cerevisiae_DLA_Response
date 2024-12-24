@@ -52,7 +52,7 @@ yeast.growth <- read.xlsx("253_2023_12863_MOESM2_ESM.xlsx", sheet = 3)
 ggplot(yeast.growth, aes(x= Condition, y=RGR2)) + #данные для графика
   geom_boxplot()
 сохраняем график
-ggsave("Дрожжи.png", width = 15, height = 12, units = "cm", dpi = 300)
+ggsave("Дрожжи.png", width = 15 (ширина), height = 12 (высота), units = "cm", dpi = 300 (разрешение))
 
 
 #ВулканоПлот
@@ -103,7 +103,7 @@ write.xlsx(x = DEGs, file = "DEGs_yeast.xlsx", rowNames = TRUE)
 
 ## Результаты и обсуждение
 В результате проделанного анализа получены следующие результаты:
-![]()
+![]() 
 
 
 
