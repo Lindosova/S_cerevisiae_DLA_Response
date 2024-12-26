@@ -127,9 +127,11 @@ Y — log10 p-значения с поправкой.
 
 В оригинальной статье результаты представлены следующим образом:
 ![](253_2023_12863_Fig4_HTML.jpg)
+[https://doi.org/10.1007/s00253-023-12863-z]
+
 
 ![](253_2023_12863_Fig1_HTML%20(1).jpg)
-
+[https://doi.org/10.1007/s00253-023-12863-z]
 ## Список литературы
 
   - Drozdova, P., Gurkov, A., Saranchina, A., Vlasevskaya, A., Zolotovskaya, E., Indosova, E., ... & Borvinskaya, E. (2024). Transcriptional response of Saccharomyces cerevisiae to lactic acid enantiomers. Applied Microbiology and Biotechnology, 108(1), 121. [https://doi.org/10.1007/s00253-023-12863-z]
